@@ -1,15 +1,18 @@
 # Text Tree
 
+`text-tree` is a CLI tool written in Nushell that transforms textual
+representation of trees into pretty ones:
+
 ## Usage
 
 ```nu
-text-tree "
+"
 project/
   lib/
   README.md
-"
+" | text-tree
 ```
 
 ```nu
-text-tree --path .
+glob **/* --exclude ["**/.git/**"] | str substring ((pwd | str length) + 1).. | text-tree
 ```
