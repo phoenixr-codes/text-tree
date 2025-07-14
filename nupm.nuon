@@ -1,0 +1,7 @@
+{
+    name: "text-tree"
+    version: "0.1.0"
+    description: "Create pretty trees from text"
+    type: "module"
+    license: "LICENSE.txt"
+}
