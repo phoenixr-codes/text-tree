@@ -1,7 +1,7 @@
 use std repeat
 
 export def format-tree [
-  style: record<child: string, last_child: string, directory: string, empty: string>
+  options: record<style: record<child: string, last_child: string, directory: string, empty: string>, auto_slashes: bool>
 ]: list<record<depth: int, name: string, kind: string, last: bool>> -> string {
   let items = $in
   $items | enumerate | each { |x|
@@ -13,13 +13,14 @@ export def format-tree [
         if ($item.depth == 0) {
           null
         } else if ($items | enumerate | where item.depth == $offset | last | get index) > $index {
-          $style.directory
+          $options.style.directory
         } else {
-          $style.empty
+          $options.style.empty
         }
       }
-      | append (if $item.last { $style.last_child } else { $style.child })
+      | append (if $item.last { $options.style.last_child } else { $options.style.child })
 
-    $"($prefix_components | str join)($item | get name)"
+    let suffix = if not ($item.name | str ends-with "/") and $options.auto_slashes and $item.kind == "dir" { "/" } else { "" }
+    $"($prefix_components | str join)($item | get name)($suffix)"
   } | str join (char newline)
 }

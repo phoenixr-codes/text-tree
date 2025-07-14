@@ -8,8 +8,9 @@ const default_style = {child: "├── ", last_child: "└── ", directory:
 export def main [
   input: string                                                                                         # The string representation of the tree
   --style: record<child: string, last_child: string, directory: string, empty: string> = $default_style # The custom style to use for the output tree
+  --auto-slashes                                                                                        # Automatically add slashed for items with children
 ]: nothing -> string {
-  $input | parse-tree | format-tree $style
+  $input | parse-tree | format-tree {style: $style, auto_slashes: $auto_slashes}
 }
 
 # Transforms a directory into a text tree.
