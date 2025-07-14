@@ -1,6 +1,3 @@
-# TODO: symlinks
-# TODO: LS_COLORS
-
 use parser.nu [ parse-tree ]
 use formatter.nu [ format-tree ]
 
