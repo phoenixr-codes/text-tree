@@ -3,7 +3,11 @@
 `text-tree` is a CLI tool written in Nushell that transforms textual
 representation of trees into pretty ones:
 
-## Usage
+![Preview GIF](./tapes/usage.gif)
+
+## Basic Usage
+
+From text:
 
 ```nu
 "
@@ -13,6 +17,8 @@ project/
 " | text-tree
 ```
 
+From path list:
+
 ```nu
-glob **/* --exclude ["**/.git/**"] | str substring ((pwd | str length) + 1).. | text-tree
+glob **/* | path split | each { slice (pwd | path split | length).. } | each { prepend "." | path join } | text-tree
 ```
