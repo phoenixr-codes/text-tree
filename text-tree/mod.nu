@@ -6,6 +6,7 @@ export const tree_styles = {
   fancy: {child: "├── ", last_child: "└── ", directory: "│   ", empty: "    "}
 }
 
+# Create a textual representation of a tree in textual form or a directory.
 @search-terms tree
 @example "Create a tree from text with default style" {
 "
